@@ -1,41 +1,37 @@
 let id = 0;
 
-function reducer(state = [], action) {
+const reducer = (state = [], action) => {
   switch (action.type) {
-    case "ADD_TODO": {
-        id++;
-        return [
-            ...state,
-            {
-                id,
-                text = action.payload.text,  
-            },
-        ]
+    case "ADD": {
+      id++;
+      return [
+        ...state,
+        {
+          id,
+          text: action.payload.text,
+        },
+      ];
     }
 
-    case "DELETE_TODO": {
-        const index = state.findIndex(n => n.id === action.payload.id);
-        
-        state.splice(index, 1);
+    case "DELETE": {
+      const index = state.findIndex((n) => n.id === action.payload.id);
 
-        return [
-            ...state,
-        ]
+      state.splice(index, 1);
+
+      return [...state];
     }
 
-    case "CHANGE_TODO_STATE": {
-        const item = state.find(n => n.id === action.payload.id);
+    case "CHANGE": {
+      const item = state.find((n) => n.id === action.payload.id);
 
-        item.done = !item.done;
+      item.done = !item.done;
 
-        return [
-            ...state,
-        ]
+      return [...state];
     }
 
     default:
       return state;
   }
-}
+};
 
 export default reducer;
