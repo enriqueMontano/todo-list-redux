@@ -2,6 +2,19 @@ import store from "./redux/store";
 
 const itemListDOM = document.querySelector("#itemList");
 const itemDOM = document.querySelector("#item");
+const newTodoInput = document.querySelector("#txtNewNote");
+
+newTodoInput.addEventListener("keypress", (e) => {
+  if (e.keyCode === 13) {
+    const text = newTodoInput.value;
+    store.dispatch({
+      type: "ADD",
+      payload: {
+        text,
+      },
+    });
+  }
+});
 
 const updateList = (items) => {
   itemListDOM.innerHTML = " ";
@@ -44,18 +57,4 @@ const updateList = (items) => {
 store.subscribe(() => {
   const state = store.getState();
   updateList(state);
-});
-
-store.dispatch({
-  type: "ADD",
-  payload: {
-    text: "hello world",
-  },
-});
-
-store.dispatch({
-  type: "ADD",
-  payload: {
-    text: "hello world 2",
-  },
 });
