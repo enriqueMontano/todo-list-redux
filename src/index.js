@@ -7,6 +7,7 @@ const newTodoInput = document.querySelector("#txtNewNote");
 newTodoInput.addEventListener("keypress", (e) => {
   if (e.keyCode === 13) {
     const text = newTodoInput.value;
+    newTodoInput.value = "";
     store.dispatch({
       type: "ADD",
       payload: {
